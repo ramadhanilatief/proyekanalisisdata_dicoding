@@ -5,9 +5,6 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-from google.colab import drive
-drive.mount("/content/drive/")
-
 def create_daily_df(df):
   daily_sharing_df = df.resample(rule='D', on='dteday').agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
   daily_sharing_df.index = daily_sharing_df.index.strftime('%Y-%m-%d')
@@ -45,7 +42,7 @@ def create_season_df(df):
   season_sharing_df = df.groupby(by=["season"], sort=False).agg({"cnt": "sum"})
   return season_sharing_df
 
-day_hour_df = pd.read_csv("/content/drive/MyDrive/Dicoding/day_hour_data.csv")
+day_hour_df = pd.read_csv("day_hour_data.csv")
 
 datetime_columns = ["dteday"]
 day_hour_df.sort_values(by="dteday", inplace=True)
