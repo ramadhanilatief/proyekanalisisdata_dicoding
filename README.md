@@ -1,5 +1,7 @@
 # Bike Sharing Dashboard :sparkles:
 
+> Run Dashboard with Google Colaboratory
+
 ## Get Dataset from Github
 ```
 !git clone https://github.com/ramadhanilatief/proyekdicoding.git
