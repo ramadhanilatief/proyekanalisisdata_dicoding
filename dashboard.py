@@ -42,7 +42,7 @@ def create_season_df(df):
   season_sharing_df = df.groupby(by=["season"], sort=False).agg({"cnt": "sum"})
   return season_sharing_df
 
-day_hour_df = pd.read_csv("day_hour_data.csv")
+day_hour_df = pd.read_csv("/content/proyekdicoding/day_hour_data.csv")
 
 datetime_columns = ["dteday"]
 day_hour_df.sort_values(by="dteday", inplace=True)
