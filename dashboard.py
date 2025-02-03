@@ -5,6 +5,8 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 
+!git clone https://github.com/ramadhanilatief/proyekdicoding.git
+
 def create_daily_df(df):
   daily_sharing_df = df.resample(rule='D', on='dteday').agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
   daily_sharing_df.index = daily_sharing_df.index.strftime('%Y-%m-%d')
