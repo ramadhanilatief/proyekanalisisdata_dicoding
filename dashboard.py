@@ -555,7 +555,7 @@ elif option == "Casual":
   sns.barplot(
       y="casual",
       x="holiday",
-      data=holiday_sharing_df.sort_values(by="casual", ascending=False)
+      data=holiday_sharing_df
   )
   plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -572,7 +572,7 @@ elif option == "Casual":
   sns.barplot(
       y="casual",
       x="workingday",
-      data=workingday_sharing_df.sort_values(by="casual", ascending=False)
+      data=workingday_sharing_df
   )
   plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -589,7 +589,7 @@ elif option == "Casual":
   sns.barplot(
       y="casual",
       x="weathersit",
-      data=weather_sharing_df.sort_values(by="casual", ascending=False)
+      data=weather_sharing_df
   )
   plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -606,7 +606,7 @@ elif option == "Casual":
   sns.barplot(
       y="casual",
       x="season",
-      data=season_sharing_df.sort_values(by="casual", ascending=False)
+      data=season_sharing_df
   )
   plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -777,7 +777,7 @@ elif option == "Registered":
   sns.barplot(
       y="registered",
       x="holiday",
-      data=holiday_sharing_df.sort_values(by="registered", ascending=False)
+      data=holiday_sharing_df
   )
   plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -794,7 +794,7 @@ elif option == "Registered":
   sns.barplot(
       y="registered",
       x="workingday",
-      data=workingday_sharing_df.sort_values(by="registered", ascending=False)
+      data=workingday_sharing_df
   )
   plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -811,7 +811,7 @@ elif option == "Registered":
   sns.barplot(
       y="registered",
       x="weathersit",
-      data=weather_sharing_df.sort_values(by="registered", ascending=False)
+      data=weather_sharing_df
   )
   plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -828,7 +828,7 @@ elif option == "Registered":
   sns.barplot(
       y="registered",
       x="season",
-      data=season_sharing_df.sort_values(by="registered", ascending=False)
+      data=season_sharing_df
   )
   plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -1011,7 +1011,7 @@ else:
   sns.barplot(
       y="cnt",
       x="holiday",
-      data=holiday_sharing_df.sort_values(by="cnt", ascending=False)
+      data=holiday_sharing_df
   )
   plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -1028,7 +1028,7 @@ else:
   sns.barplot(
       y="cnt",
       x="workingday",
-      data=workingday_sharing_df.sort_values(by="cnt", ascending=False)
+      data=workingday_sharing_df
   )
   plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -1045,7 +1045,7 @@ else:
   sns.barplot(
       y="cnt",
       x="weathersit",
-      data=weather_sharing_df.sort_values(by="cnt", ascending=False)
+      data=weather_sharing_df
   )
   plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -1062,7 +1062,7 @@ else:
   sns.barplot(
       y="cnt",
       x="season",
-      data=season_sharing_df.sort_values(by="cnt", ascending=False)
+      data=season_sharing_df
   )
   plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
   plt.ylabel(None)
