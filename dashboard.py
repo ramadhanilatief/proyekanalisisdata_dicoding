@@ -553,7 +553,7 @@ elif option == "Casual":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="casual",
+      y="casual_sharing",
       x="holiday",
       data=holiday_sharing_df
   )
