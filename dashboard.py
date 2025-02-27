@@ -304,7 +304,7 @@ if option == "All":
       x="holiday", 
       y="count", 
       hue="user_type",
-      data=df_melted_holiday.sort_values(by="cnt", ascending=False)
+      data=df_melted_holiday
   )
   plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -325,9 +325,9 @@ if option == "All":
       x="workingday", 
       y="count", 
       hue="user_type",
-      data=df_melted_workingday.sort_values(by="cnt", ascending=False)
+      data=df_melted_workingday
   )
-  plt.title("Number of Bike Sharing by Workingday or Not Holiday", loc="center", fontsize=15)
+  plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
@@ -346,7 +346,7 @@ if option == "All":
       x="weathersit", 
       y="count", 
       hue="user_type",
-      data=df_melted_weather.sort_values(by="cnt", ascending=False)
+      data=df_melted_weather
   )
   plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -367,7 +367,7 @@ if option == "All":
       x="season", 
       y="count", 
       hue="user_type",
-      data=df_melted_season.sort_values(by="cnt", ascending=False)
+      data=df_melted_season
   )
   plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -548,6 +548,164 @@ elif option == "Casual":
   plt.title("Monthly Casual Bike Sharing", loc="center", fontsize=15)
       
   st.pyplot(fig)
+
+  st.subheader('Bike Sharing by Holiday or Not Holiday')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="casual",
+      x="holiday",
+      data=holiday_sharing_df.sort_values(by="casual", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Workingday or Not Workingday')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="casual",
+      x="workingday",
+      data=workingday_sharing_df.sort_values(by="casual", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Weather')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="casual",
+      x="weathersit",
+      data=weather_sharing_df.sort_values(by="casual", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Season')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="casual",
+      x="season",
+      data=season_sharing_df.sort_values(by="casual", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Year')
+  
+  yr_df = day_hour_df.groupby(by=["yr"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  })
+  
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="casual",
+      x="yr",
+      data=yr_df
+  )
+  plt.title("Number of Bike Sharing by Year", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Month')
+  
+  mnth_df = day_hour_df.groupby(by=["mnth"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  })
+
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="casual",
+      x="mnth",
+      data=mnth_df
+  )
+  plt.title("Number of Bike Sharing by Month", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Weekday')
+  
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  
+  weekday_df = day_hour_df.groupby(by=["weekday"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  }).reindex(days)
+
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="casual",
+      x="weekday",
+      data=weekday_df
+  )
+  plt.title("Number of Bike Sharing by Weekday", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Hour')
+  
+  hr_df = day_hour_df.groupby(by=["hr"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  })
+ 
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="casual",
+      x="hr",
+      data=hr_df
+  )
+  plt.title("Number of Bike Sharing by Hour", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
   
 elif option == "Registered":
   st.subheader('Daily Bike Sharing')
@@ -611,6 +769,164 @@ elif option == "Registered":
   plt.tick_params(axis='x', labelsize=15)
   plt.title("Monthly Registered Bike Sharing", loc="center", fontsize=15)
       
+  st.pyplot(fig)
+
+  st.subheader('Bike Sharing by Holiday or Not Holiday')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="registered",
+      x="holiday",
+      data=holiday_sharing_df.sort_values(by="registered", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Workingday or Not Workingday')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="registered",
+      x="workingday",
+      data=workingday_sharing_df.sort_values(by="registered", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Weather')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="registered",
+      x="weathersit",
+      data=weather_sharing_df.sort_values(by="registered", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Season')
+  
+  fig = plt.figure(figsize=(16, 8))
+  sns.barplot(
+      y="registered",
+      x="season",
+      data=season_sharing_df.sort_values(by="registered", ascending=False)
+  )
+  plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Year')
+  
+  yr_df = day_hour_df.groupby(by=["yr"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  })
+  
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="registered",
+      x="yr",
+      data=yr_df
+  )
+  plt.title("Number of Bike Sharing by Year", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Month')
+  
+  mnth_df = day_hour_df.groupby(by=["mnth"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  })
+
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="registered",
+      x="mnth",
+      data=mnth_df
+  )
+  plt.title("Number of Bike Sharing by Month", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Weekday')
+  
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  
+  weekday_df = day_hour_df.groupby(by=["weekday"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  }).reindex(days)
+
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="registered",
+      x="weekday",
+      data=weekday_df
+  )
+  plt.title("Number of Bike Sharing by Weekday", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
+  st.pyplot(fig)
+  
+  st.subheader('Bike Sharing by Hour')
+  
+  hr_df = day_hour_df.groupby(by=["hr"], sort=False).agg({
+      "casual": "sum",
+      "registered": "sum",
+      "cnt": "sum"
+  })
+ 
+  fig = plt.figure(figsize=(10, 5))
+  sns.barplot(
+      y="registered",
+      x="hr",
+      data=hr_df
+  )
+  plt.title("Number of Bike Sharing by Hour", loc="center", fontsize=15)
+  plt.ylabel(None)
+  plt.xlabel(None)
+  plt.tick_params(axis='x', labelsize=12)
+  plt.xticks(rotation=45)
+  
   st.pyplot(fig)
   
 else:
@@ -714,7 +1030,7 @@ else:
       x="workingday",
       data=workingday_sharing_df.sort_values(by="cnt", ascending=False)
   )
-  plt.title("Number of Bike Sharing by Workingday or Not Holiday", loc="center", fontsize=15)
+  plt.title("Number of Bike Sharing by Workingday or Not Workingday", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
@@ -837,7 +1153,7 @@ else:
   sns.barplot(
       y="cnt",
       x="hr",
-      data=hr_df.sort_values(by="cnt", ascending=False)
+      data=hr_df
   )
   plt.title("Number of Bike Sharing by Hour", loc="center", fontsize=15)
   plt.ylabel(None)
