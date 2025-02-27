@@ -27,19 +27,23 @@ def create_monthly_df(df):
   return monthly_sharing_df
 
 def create_holiday_df(df):
-  holiday_sharing_df = df.groupby(by=["holiday"], sort=False).agg({"cnt": "sum"})
+  holiday_sharing_df = df.groupby(by=["holiday"], sort=False).agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
+  holiday_sharing_df.rename(columns={"casual": "casual_sharing", "registered": "registered_sharing", "cnt": "total_sharing"}, inplace=True)
   return holiday_sharing_df
 
 def create_workingday_df(df):
-  workingday_sharing_df = df.groupby(by=["workingday"], sort=False).agg({"cnt": "sum"})
+  workingday_sharing_df = df.groupby(by=["workingday"], sort=False).agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
+  workingday_sharing_df.rename(columns={"casual": "casual_sharing", "registered": "registered_sharing", "cnt": "total_sharing"}, inplace=True)
   return workingday_sharing_df
 
 def create_weather_df(df):
-  weather_sharing_df = df.groupby(by=["weathersit"], sort=False).agg({"cnt": "sum"})
+  weather_sharing_df = df.groupby(by=["weathersit"], sort=False).agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
+  weather_sharing_df.rename(columns={"casual": "casual_sharing", "registered": "registered_sharing", "cnt": "total_sharing"}, inplace=True)
   return weather_sharing_df
 
 def create_season_df(df):
-  season_sharing_df = df.groupby(by=["season"], sort=False).agg({"cnt": "sum"})
+  season_sharing_df = df.groupby(by=["season"], sort=False).agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
+  season_sharing_df.rename(columns={"casual": "casual_sharing", "registered": "registered_sharing", "cnt": "total_sharing"}, inplace=True)
   return season_sharing_df
 
 day_hour_df = pd.read_csv("day_hour_data.csv")
@@ -335,7 +339,7 @@ if option == "All":
 
   weather_sharing_df = weather_sharing_df.reset_index()
   
-  df_melted_weather = weather_sharing_df.melt(id_vars=["weather"], var_name="user_type", value_name="count")
+  df_melted_weather = weather_sharing_df.melt(id_vars=["weathersit"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
