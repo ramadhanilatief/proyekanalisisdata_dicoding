@@ -290,6 +290,8 @@ if option == "All":
   st.pyplot(fig_1)
   
   st.subheader('Bike Sharing by Holiday or Not Holiday')
+
+  holiday_sharing_df = holiday_sharing_df.reset_index()  
   
   df_melted = holiday_sharing_df.melt(id_vars=["holiday"], var_name="user_type", value_name="count")
   
@@ -310,6 +312,8 @@ if option == "All":
   st.pyplot(fig)
   
   st.subheader('Bike Sharing by Workingday or Not Workingday')
+
+  workingday_sharing_df = workingday_sharing_df.reset_index()  
   
   df_melted = workingday_sharing_df.melt(id_vars=["workingday"], var_name="user_type", value_name="count")
   
@@ -330,6 +334,8 @@ if option == "All":
   st.pyplot(fig)
   
   st.subheader('Bike Sharing by Weather')
+
+  weather_sharing_df = weather_sharing_df.reset_index()  
   
   df_melted = weather_sharing_df.melt(id_vars=["weather"], var_name="user_type", value_name="count")
   
@@ -350,6 +356,8 @@ if option == "All":
   st.pyplot(fig)
   
   st.subheader('Bike Sharing by Season')
+
+  season_sharing_df = season_sharing_df.reset_index()  
   
   df_melted = season_sharing_df.melt(id_vars=["season"], var_name="user_type", value_name="count")
   
@@ -376,6 +384,8 @@ if option == "All":
       "registered": "sum",
       "cnt": "sum"
   })
+
+  yr_sharing_df = yr_sharing_df.reset_index()  
   
   df_melted = yr_df.melt(id_vars=["yr"], var_name="user_type", value_name="count")
   
@@ -401,6 +411,8 @@ if option == "All":
       "registered": "sum",
       "cnt": "sum"
   })
+
+  mnth_sharing_df = mnth_sharing_df.reset_index()  
  
   df_melted = mnth_sharing_df.melt(id_vars=["mnth"], var_name="user_type", value_name="count")
   
@@ -429,6 +441,8 @@ if option == "All":
       "cnt": "sum"
   }).reindex(days)
 
+  weekday_sharing_df = weekday_sharing_df.reset_index()  
+
   df_melted = weekday_sharing_df.melt(id_vars=["weekday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
@@ -453,6 +467,8 @@ if option == "All":
       "registered": "sum",
       "cnt": "sum"
   })
+
+  hr_sharing_df = hr_sharing_df.reset_index()  
   
   df_melted = hr_sharing_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
   
