@@ -57,9 +57,13 @@ max_date = day_hour_df["dteday"].max()
 with st.sidebar:
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
-        label='Time Range',min_value=min_date,
+        label='Time range',min_value=min_date,
         max_value=max_date,
         value=[min_date, max_date]
+    )
+    option = st.selectbox(
+    "What bike sharing user data would you like to display?",
+    ("All", "Casual", "Registered", "Total"),
     )
 
 main_df = day_hour_df[(day_hour_df["dteday"] >= str(start_date)) & (day_hour_df["dteday"] <= str(end_date))]
@@ -76,69 +80,131 @@ st.header('Bike Sharing Dashboard :sparkles:')
 
 st.subheader('Daily Bike Sharing')
 
-col1, col2 = st.columns(2)
+if option == "All":
+  col1, col2 = st.columns(2)
 
-with col1:
+  with col1:
+    casual_sharing = daily_sharing_df.casual_sharing.sum()
+    st.metric("Casual sharing", value=casual_sharing)
+    registered_sharing = daily_sharing_df.registered_sharing.sum()
+    st.metric("Registered sharing", value=registered_sharing)
+
+  with col2:
+    total_sharing = daily_sharing_df.total_sharing.sum()
+    st.metric("Total sharing", value=total_sharing)
+  
+  col3, col4 = st.columns(2)
+   
+  with col3:
+      fig, ax = plt.subplots(figsize=(20, 10))
+      ax.plot(
+        daily_sharing_df["dteday"],
+        daily_sharing_df["casual_sharing"],
+        marker='o', 
+        linewidth=2,
+        color="#90CAF9"
+        )
+      plt.xticks(fontsize=10,rotation=90)
+      plt.yticks(fontsize=10)
+      plt.tick_params(axis='y', labelsize=15)
+      plt.tick_params(axis='x', labelsize=15)
+      plt.title("Daily Casual Bike Sharing", loc="center", fontsize=15)
+      
+      st.pyplot(fig)
+   
+  with col4:
+      fig, ax = plt.subplots(figsize=(20, 10))
+      ax.plot(
+        daily_sharing_df["dteday"],
+        daily_sharing_df["registered_sharing"],
+        marker='o', 
+        linewidth=2,
+        color="#90CAF9"
+        )
+      plt.xticks(fontsize=10,rotation=90)
+      plt.yticks(fontsize=10)
+      plt.tick_params(axis='y', labelsize=15)
+      plt.tick_params(axis='x', labelsize=15)
+      plt.title("Daily Registered Bike Sharing", loc="center", fontsize=15)
+      
+      st.pyplot(fig)
+  
+  fig, ax = plt.subplots(figsize=(16, 8))
+  ax.plot(
+      daily_sharing_df["dteday"],
+      daily_sharing_df["total_sharing"],
+      marker='o', 
+      linewidth=2,
+      color="#90CAF9"
+  )
+  plt.xticks(fontsize=10,rotation=90)
+  plt.yticks(fontsize=10)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.title("Daily Total Bike Sharing", loc="center", fontsize=15)
+   
+  st.pyplot(fig)
+elif option == "Casual":
   casual_sharing = daily_sharing_df.casual_sharing.sum()
   st.metric("Casual sharing", value=casual_sharing)
   registered_sharing = daily_sharing_df.registered_sharing.sum()
   st.metric("Registered sharing", value=registered_sharing)
 
-with col2:
+  fig, ax = plt.subplots(figsize=(20, 10))
+  ax.plot(
+    daily_sharing_df["dteday"],
+    daily_sharing_df["casual_sharing"],
+    marker='o', 
+    linewidth=2,
+    color="#90CAF9"
+  )
+  plt.xticks(fontsize=10,rotation=90)
+  plt.yticks(fontsize=10)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.title("Daily Casual Bike Sharing", loc="center", fontsize=15)
+      
+  st.pyplot(fig)
+elif option == "Registered":
+  casual_sharing = daily_sharing_df.casual_sharing.sum()
+  st.metric("Casual sharing", value=casual_sharing)
+  registered_sharing = daily_sharing_df.registered_sharing.sum()
+  st.metric("Registered sharing", value=registered_sharing)
+
+  fig, ax = plt.subplots(figsize=(20, 10))
+  ax.plot(
+    daily_sharing_df["dteday"],
+    daily_sharing_df["registered_sharing"],
+    marker='o', 
+    linewidth=2,
+    color="#90CAF9"
+  )
+  plt.xticks(fontsize=10,rotation=90)
+  plt.yticks(fontsize=10)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.title("Daily Registered Bike Sharing", loc="center", fontsize=15)
+      
+  st.pyplot(fig)
+else:
   total_sharing = daily_sharing_df.total_sharing.sum()
   st.metric("Total sharing", value=total_sharing)
 
-col3, col4 = st.columns(2)
- 
-with col3:
-    fig, ax = plt.subplots(figsize=(20, 10))
-    ax.plot(
-      daily_sharing_df["dteday"],
-      daily_sharing_df["casual_sharing"],
-      marker='o', 
-      linewidth=2,
-      color="#90CAF9"
-      )
-    plt.xticks(fontsize=10,rotation=90)
-    plt.yticks(fontsize=10)
-    plt.tick_params(axis='y', labelsize=15)
-    plt.tick_params(axis='x', labelsize=15)
-    plt.title("Daily Casual Bike Sharing", loc="center", fontsize=15)
-    
-    st.pyplot(fig)
- 
-with col4:
-    fig, ax = plt.subplots(figsize=(20, 10))
-    ax.plot(
-      daily_sharing_df["dteday"],
-      daily_sharing_df["registered_sharing"],
-      marker='o', 
-      linewidth=2,
-      color="#90CAF9"
-      )
-    plt.xticks(fontsize=10,rotation=90)
-    plt.yticks(fontsize=10)
-    plt.tick_params(axis='y', labelsize=15)
-    plt.tick_params(axis='x', labelsize=15)
-    plt.title("Daily Registered Bike Sharing", loc="center", fontsize=15)
-    
-    st.pyplot(fig)
-
-fig, ax = plt.subplots(figsize=(16, 8))
-ax.plot(
+  fig, ax = plt.subplots(figsize=(16, 8))
+  ax.plot(
     daily_sharing_df["dteday"],
     daily_sharing_df["total_sharing"],
     marker='o', 
     linewidth=2,
     color="#90CAF9"
-)
-plt.xticks(fontsize=10,rotation=90)
-plt.yticks(fontsize=10)
-plt.tick_params(axis='y', labelsize=15)
-plt.tick_params(axis='x', labelsize=15)
-plt.title("Daily Total Bike Sharing", loc="center", fontsize=15)
- 
-st.pyplot(fig)
+  )
+  plt.xticks(fontsize=10,rotation=90)
+  plt.yticks(fontsize=10)
+  plt.tick_params(axis='y', labelsize=15)
+  plt.tick_params(axis='x', labelsize=15)
+  plt.title("Daily Total Bike Sharing", loc="center", fontsize=15)
+
+  st.pyplot(fig)
 
 st.subheader('Weekly Bike Sharing')
 
