@@ -570,7 +570,7 @@ elif option == "Casual":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="casual",
+      y="casual_sharing",
       x="workingday",
       data=workingday_sharing_df
   )
@@ -587,7 +587,7 @@ elif option == "Casual":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="casual",
+      y="casual_sharing",
       x="weathersit",
       data=weather_sharing_df
   )
@@ -604,7 +604,7 @@ elif option == "Casual":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="casual",
+      y="casual_sharing",
       x="season",
       data=season_sharing_df
   )
@@ -775,7 +775,7 @@ elif option == "Registered":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="registered",
+      y="registered_sharing",
       x="holiday",
       data=holiday_sharing_df
   )
@@ -792,7 +792,7 @@ elif option == "Registered":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="registered",
+      y="registered_sharing",
       x="workingday",
       data=workingday_sharing_df
   )
@@ -809,7 +809,7 @@ elif option == "Registered":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="registered",
+      y="registered_sharing",
       x="weathersit",
       data=weather_sharing_df
   )
@@ -826,7 +826,7 @@ elif option == "Registered":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="registered",
+      y="registered_sharing",
       x="season",
       data=season_sharing_df
   )
@@ -1009,7 +1009,7 @@ else:
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
+      y="total_sharing",
       x="holiday",
       data=holiday_sharing_df
   )
@@ -1026,7 +1026,7 @@ else:
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
+      y="total_sharing",
       x="workingday",
       data=workingday_sharing_df
   )
@@ -1043,7 +1043,7 @@ else:
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
+      y="total_sharing",
       x="weathersit",
       data=weather_sharing_df
   )
@@ -1060,7 +1060,7 @@ else:
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
+      y="total_sharing",
       x="season",
       data=season_sharing_df
   )
