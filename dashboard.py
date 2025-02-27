@@ -293,21 +293,20 @@ if option == "All":
 
   holiday_sharing_df = holiday_sharing_df.reset_index()  
   
-  df_melted = holiday_sharing_df.melt(id_vars=["holiday"], var_name="user_type", value_name="count")
+  df_melted_holiday = holiday_sharing_df.melt(id_vars=["holiday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="holiday", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_holiday
   )
   plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -315,43 +314,41 @@ if option == "All":
 
   workingday_sharing_df = workingday_sharing_df.reset_index()  
   
-  df_melted = workingday_sharing_df.melt(id_vars=["workingday"], var_name="user_type", value_name="count")
+  df_melted_workingday = workingday_sharing_df.melt(id_vars=["workingday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="workingday", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_workingday
   )
   plt.title("Number of Bike Sharing by Workingday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
   st.subheader('Bike Sharing by Weather')
 
-  weather_sharing_df = weather_sharing_df.reset_index()  
+  weather_sharing_df = weather_sharing_df.reset_index()
   
-  df_melted = weather_sharing_df.melt(id_vars=["weather"], var_name="user_type", value_name="count")
+  df_melted_weather = weather_sharing_df.melt(id_vars=["weather"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="weather", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_weather
   )
   plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -359,21 +356,20 @@ if option == "All":
 
   season_sharing_df = season_sharing_df.reset_index()  
   
-  df_melted = season_sharing_df.melt(id_vars=["season"], var_name="user_type", value_name="count")
+  df_melted_season = season_sharing_df.melt(id_vars=["season"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="season", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_season
   )
   plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -387,20 +383,19 @@ if option == "All":
 
   yr_sharing_df = yr_sharing_df.reset_index()  
   
-  df_melted = yr_df.melt(id_vars=["yr"], var_name="user_type", value_name="count")
+  df_melted_yr = yr_df.melt(id_vars=["yr"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="yr", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_yr
   )
   plt.title("Number of Bike Sharing by Year", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -414,20 +409,19 @@ if option == "All":
 
   mnth_sharing_df = mnth_sharing_df.reset_index()  
  
-  df_melted = mnth_sharing_df.melt(id_vars=["mnth"], var_name="user_type", value_name="count")
+  df_melted_mnth = mnth_sharing_df.melt(id_vars=["mnth"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="mnth", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_mnth
   )
   plt.title("Number of Bike Sharing by Month", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -443,20 +437,19 @@ if option == "All":
 
   weekday_sharing_df = weekday_sharing_df.reset_index()  
 
-  df_melted = weekday_sharing_df.melt(id_vars=["weekday"], var_name="user_type", value_name="count")
+  df_melted_weekday = weekday_sharing_df.melt(id_vars=["weekday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="weekday", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_weekday
   )
   plt.title("Number of Bike Sharing by Weekday", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -470,20 +463,19 @@ if option == "All":
 
   hr_sharing_df = hr_sharing_df.reset_index()  
   
-  df_melted = hr_sharing_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
+  df_melted_hr = hr_sharing_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="hr", 
       y="count", 
       hue="user_type",
-      data=df_melted
+      data=df_melted_hr
   )
   plt.title("Number of Bike Sharing by Hour", loc="center", fontsize=15)
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
