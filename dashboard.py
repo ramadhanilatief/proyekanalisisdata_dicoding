@@ -295,9 +295,9 @@ if option == "All":
   
   st.subheader('Bike Sharing by Holiday or Not Holiday')
 
-  holiday_sharing_df = holiday_sharing_df.reset_index()  
+  holiday_sharing_df1 = holiday_sharing_df.reset_index()  
   
-  df_melted_holiday = holiday_sharing_df.melt(id_vars=["holiday"], var_name="user_type", value_name="count")
+  df_melted_holiday = holiday_sharing_df1.melt(id_vars=["holiday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -316,9 +316,9 @@ if option == "All":
   
   st.subheader('Bike Sharing by Workingday or Not Workingday')
 
-  workingday_sharing_df = workingday_sharing_df.reset_index()  
+  workingday_sharing_df1 = workingday_sharing_df.reset_index()  
   
-  df_melted_workingday = workingday_sharing_df.melt(id_vars=["workingday"], var_name="user_type", value_name="count")
+  df_melted_workingday = workingday_sharing_df1.melt(id_vars=["workingday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -337,9 +337,9 @@ if option == "All":
   
   st.subheader('Bike Sharing by Weather')
 
-  weather_sharing_df = weather_sharing_df.reset_index()
+  weather_sharing_df1 = weather_sharing_df.reset_index()
   
-  df_melted_weather = weather_sharing_df.melt(id_vars=["weathersit"], var_name="user_type", value_name="count")
+  df_melted_weather = weather_sharing_df1.melt(id_vars=["weathersit"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -358,9 +358,9 @@ if option == "All":
   
   st.subheader('Bike Sharing by Season')
 
-  season_sharing_df = season_sharing_df.reset_index()  
+  season_sharing_df1 = season_sharing_df.reset_index()  
   
-  df_melted_season = season_sharing_df.melt(id_vars=["season"], var_name="user_type", value_name="count")
+  df_melted_season = season_sharing_df1.melt(id_vars=["season"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -385,9 +385,9 @@ if option == "All":
       "cnt": "sum"
   })
 
-  yr_df = yr_df.reset_index()  
+  yr_df1 = yr_df.reset_index()  
   
-  df_melted_yr = yr_df.melt(id_vars=["yr"], var_name="user_type", value_name="count")
+  df_melted_yr = yr_df1.melt(id_vars=["yr"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -411,9 +411,9 @@ if option == "All":
       "cnt": "sum"
   })
 
-  mnth_df = mnth_df.reset_index()  
+  mnth_df1 = mnth_df.reset_index()  
  
-  df_melted_mnth = mnth_df.melt(id_vars=["mnth"], var_name="user_type", value_name="count")
+  df_melted_mnth = mnth_df1.melt(id_vars=["mnth"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -439,9 +439,9 @@ if option == "All":
       "cnt": "sum"
   }).reindex(days)
 
-  weekday_df = weekday_df.reset_index()  
+  weekday_df1 = weekday_df.reset_index()  
 
-  df_melted_weekday = weekday_df.melt(id_vars=["weekday"], var_name="user_type", value_name="count")
+  df_melted_weekday = weekday_df1.melt(id_vars=["weekday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
@@ -465,9 +465,9 @@ if option == "All":
       "cnt": "sum"
   })
 
-  hr_df = hr_df.reset_index()  
+  hr_df1 = hr_df.reset_index()  
   
-  df_melted_hr = hr_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
+  df_melted_hr = hr_df1.melt(id_vars=["hr"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
