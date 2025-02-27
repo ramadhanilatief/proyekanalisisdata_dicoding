@@ -291,17 +291,14 @@ if option == "All":
   
   st.subheader('Bike Sharing by Holiday or Not Holiday')
   
-  colors = ["#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
-
   df_melted = holiday_sharing_df.melt(id_vars=["holiday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="holiday", 
       y="count", 
-      hue="user_type"
-      data=df_melted.sort_values(by="cnt", ascending=False),
-      palette=colors
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Holiday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -314,17 +311,14 @@ if option == "All":
   
   st.subheader('Bike Sharing by Workingday or Not Workingday')
   
-  colors = ["#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
-  
   df_melted = workingday_sharing_df.melt(id_vars=["workingday"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="workingday", 
       y="count", 
-      hue="user_type"
-      data=df_melted.sort_values(by="cnt", ascending=False),
-      palette=colors
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Workingday or Not Holiday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -337,17 +331,14 @@ if option == "All":
   
   st.subheader('Bike Sharing by Weather')
   
-  colors = ["#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
-  
   df_melted = weather_sharing_df.melt(id_vars=["weather"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
       x="weather", 
       y="count", 
-      hue="user_type"
-      data=df_melted.sort_values(by="cnt", ascending=False),
-      palette=colors
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Weather", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -360,12 +351,14 @@ if option == "All":
   
   st.subheader('Bike Sharing by Season')
   
+  df_melted = season_sharing_df.melt(id_vars=["season"], var_name="user_type", value_name="count")
+  
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
-      x="season",
-      data=season_sharing_df.sort_values(by="cnt", ascending=False),
-      palette=colors
+      x="season", 
+      y="count", 
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Season", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -384,14 +377,14 @@ if option == "All":
       "cnt": "sum"
   })
   
-  colors = ["#D3D3D3", "#72BCD4"]
+  df_melted = yr_df.melt(id_vars=["yr"], var_name="user_type", value_name="count")
   
-  fig = plt.figure(figsize=(10, 5))
+  fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
-      x="yr",
-      data=yr_df,
-      palette=colors
+      x="yr", 
+      y="count", 
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Year", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -408,15 +401,15 @@ if option == "All":
       "registered": "sum",
       "cnt": "sum"
   })
+ 
+  df_melted = mnth_sharing_df.melt(id_vars=["mnth"], var_name="user_type", value_name="count")
   
-  colors = ["#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
-  
-  fig = plt.figure(figsize=(10, 5))
+  fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
-      x="mnth",
-      data=mnth_df,
-      palette=colors
+      x="mnth", 
+      y="count", 
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Month", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -435,15 +428,15 @@ if option == "All":
       "registered": "sum",
       "cnt": "sum"
   }).reindex(days)
+
+  df_melted = weekday_sharing_df.melt(id_vars=["weekday"], var_name="user_type", value_name="count")
   
-  colors = ["#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3"]
-  
-  fig = plt.figure(figsize=(10, 5))
+  fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
-      x="weekday",
-      data=weekday_df,
-      palette=colors
+      x="weekday", 
+      y="count", 
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Weekday", loc="center", fontsize=15)
   plt.ylabel(None)
@@ -461,14 +454,14 @@ if option == "All":
       "cnt": "sum"
   })
   
-  colors = ["#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
+  df_melted = hr_sharing_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
   
-  fig = plt.figure(figsize=(10, 5))
+  fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      y="cnt",
-      x="hr",
-      data=hr_df.sort_values(by="cnt", ascending=False),
-      palette=colors
+      x="hr", 
+      y="count", 
+      hue="user_type",
+      data=df_melted
   )
   plt.title("Number of Bike Sharing by Hour", loc="center", fontsize=15)
   plt.ylabel(None)
