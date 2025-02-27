@@ -467,7 +467,7 @@ if option == "All":
 
   hr_df = hr_df.reset_index()  
   
-  df_hr = hr_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
+  df_melted_hr = hr_df.melt(id_vars=["hr"], var_name="user_type", value_name="count")
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
