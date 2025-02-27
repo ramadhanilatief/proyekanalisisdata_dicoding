@@ -562,7 +562,6 @@ elif option == "Casual":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -579,7 +578,6 @@ elif option == "Casual":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -596,7 +594,6 @@ elif option == "Casual":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -613,7 +610,6 @@ elif option == "Casual":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -635,7 +631,6 @@ elif option == "Casual":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -657,7 +652,6 @@ elif option == "Casual":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -681,7 +675,6 @@ elif option == "Casual":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -703,7 +696,6 @@ elif option == "Casual":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -784,7 +776,6 @@ elif option == "Registered":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -801,7 +792,6 @@ elif option == "Registered":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -818,7 +808,6 @@ elif option == "Registered":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -835,7 +824,6 @@ elif option == "Registered":
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -857,7 +845,6 @@ elif option == "Registered":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -879,7 +866,6 @@ elif option == "Registered":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -903,7 +889,6 @@ elif option == "Registered":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -925,7 +910,6 @@ elif option == "Registered":
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1018,7 +1002,6 @@ else:
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1035,7 +1018,6 @@ else:
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1052,7 +1034,6 @@ else:
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1069,7 +1050,6 @@ else:
   plt.xlabel(None)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1091,7 +1071,6 @@ else:
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1113,7 +1092,6 @@ else:
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1137,7 +1115,6 @@ else:
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
   
@@ -1159,6 +1136,5 @@ else:
   plt.ylabel(None)
   plt.xlabel(None)
   plt.tick_params(axis='x', labelsize=12)
-  plt.xticks(rotation=45)
   
   st.pyplot(fig)
