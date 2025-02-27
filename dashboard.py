@@ -343,7 +343,7 @@ if option == "All":
   
   fig = plt.figure(figsize=(16, 8))
   sns.barplot(
-      x="weather", 
+      x="weathersit", 
       y="count", 
       hue="user_type",
       data=df_melted_weather
