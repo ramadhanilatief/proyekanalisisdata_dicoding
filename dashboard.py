@@ -2,12 +2,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import matplotlib.dates as mdates
 from babel.numbers import format_currency
 sns.set(style='dark')
 
 def create_daily_df(df):
   daily_sharing_df = df.resample(rule='D', on='dteday').agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
   daily_sharing_df.index = daily_sharing_df.index.strftime('%Y-%m-%d')
+  daily_sharing_df = daily_sharing_df.reset_index()
+  daily_sharing_df.rename(columns={"casual": "casual_sharing", "registered": "registered_sharing", "cnt": "total_sharing"}, inplace=True)
+  return daily_sharing_df
+
+def create_daily_df_visual(df):
+  daily_sharing_df = df.resample(rule='D', on='dteday').agg({"casual": "sum", "registered": "sum", "cnt": "sum"})
   daily_sharing_df = daily_sharing_df.reset_index()
   daily_sharing_df.rename(columns={"casual": "casual_sharing", "registered": "registered_sharing", "cnt": "total_sharing"}, inplace=True)
   return daily_sharing_df
@@ -73,6 +80,7 @@ with st.sidebar:
 main_df = day_hour_df[(day_hour_df["dteday"] >= str(start_date)) & (day_hour_df["dteday"] <= str(end_date))]
 
 daily_sharing_df = create_daily_df(main_df)
+daily_sharing_df_visual = create_daily_df_visual(main_df)
 weekly_sharing_df = create_weekly_df(main_df)
 monthly_sharing_df = create_monthly_df(main_df)
 holiday_sharing_df = create_holiday_df(main_df)
@@ -100,53 +108,113 @@ if option == "All":
   col3, col4 = st.columns(2)
    
   with col3:
+      plt.style.use("seaborn-v0_8-whitegrid")
       fig, ax = plt.subplots(figsize=(20, 10))
       ax.plot(
-        daily_sharing_df["dteday"],
-        daily_sharing_df["casual_sharing"],
-        marker='o', 
-        linewidth=2,
-        color="#90CAF9"
-        )
+        daily_sharing_df_visual["dteday"],
+        daily_sharing_df_visual["casual_sharing"],
+        color="#90CAF9",
+        linewidth=1.5,
+        alpha=0.6,
+        label="Daily Casual Sharing"
+      )
+      daily_sharing_df_visual["rolling_30_casual"] = (
+        daily_sharing_df_visual["casual_sharing"]
+        .rolling(window=30)
+        .mean()
+      )
+      ax.plot(
+        daily_sharing_df_visual["dteday"],
+        daily_sharing_df_visual["rolling_30_casual"],
+        color="#D32F2F",
+        linewidth=3,
+        label="30-Day Average"
+      )
+      ax.xaxis.set_major_locator(mdates.MonthLocator())
+      ax.xaxis.set_major_formatter(mdates.DateFormatter('%B-%Y'))
       plt.xticks(fontsize=10,rotation=90)
       plt.yticks(fontsize=10)
       plt.tick_params(axis='y', labelsize=15)
       plt.tick_params(axis='x', labelsize=15)
-      plt.title("Daily Casual Bike Sharing", loc="center", fontsize=15)
-      
+      plt.title("Daily Casual Bike Sharing Usage", loc="center", fontsize=15)
+      ax.set_xlabel("Date", fontsize=13)
+      ax.set_ylabel("Casual Bike Sharing", fontsize=13)
+      ax.grid(True, linestyle='--', alpha=0.4)
+      ax.legend()
+
       st.pyplot(fig)
    
   with col4:
+      plt.style.use("seaborn-v0_8-whitegrid")
       fig, ax = plt.subplots(figsize=(20, 10))
       ax.plot(
-        daily_sharing_df["dteday"],
-        daily_sharing_df["registered_sharing"],
-        marker='o', 
-        linewidth=2,
-        color="#90CAF9"
-        )
+        daily_sharing_df_visual["dteday"],
+        daily_sharing_df_visual["registered_sharing"],
+        color="#90CAF9",
+        linewidth=1.5,
+        alpha=0.6,
+        label="Daily Registered Sharing"
+      )
+      daily_sharing_df_visual["rolling_30_registered"] = (
+        daily_sharing_df_visual["registered_sharing"]
+        .rolling(window=30)
+        .mean()
+      )
+      ax.plot(
+        daily_sharing_df_visual["dteday"],
+        daily_sharing_df_visual["rolling_30_registered"],
+        color="#D32F2F",
+        linewidth=3,
+        label="30-Day Average"
+      )
+      ax.xaxis.set_major_locator(mdates.MonthLocator())
+      ax.xaxis.set_major_formatter(mdates.DateFormatter('%B-%Y'))
       plt.xticks(fontsize=10,rotation=90)
       plt.yticks(fontsize=10)
       plt.tick_params(axis='y', labelsize=15)
       plt.tick_params(axis='x', labelsize=15)
       plt.title("Daily Registered Bike Sharing", loc="center", fontsize=15)
-      
+      ax.set_xlabel("Date", fontsize=13)
+      ax.set_ylabel("Registered Bike Sharing Usage", fontsize=13)
+      ax.grid(True, linestyle='--', alpha=0.4)
+      ax.legend()
+
       st.pyplot(fig)
   
+  plt.style.use("seaborn-v0_8-whitegrid")
   fig, ax = plt.subplots(figsize=(16, 8))
   ax.plot(
-      daily_sharing_df["dteday"],
-      daily_sharing_df["total_sharing"],
-      marker='o', 
-      linewidth=2,
-      color="#90CAF9"
+      daily_sharing_df_visual["dteday"],
+      daily_sharing_df_visual["total_sharing"],
+      color="#90CAF9",
+      linewidth=1.5,
+      alpha=0.6,
+      label="Daily Total Sharing"
   )
+  daily_sharing_df_visual["rolling_30_total"] = (
+      daily_sharing_df_visual["total_sharing"]
+      .rolling(window=30)
+      .mean()
+  )
+  ax.plot(
+      daily_sharing_df_visual["dteday"],
+      daily_sharing_df_visual["rolling_30_total"],
+      color="#D32F2F",
+      linewidth=3,
+      label="30-Day Average"
+  )
+  ax.xaxis.set_major_locator(mdates.MonthLocator())
+  ax.xaxis.set_major_formatter(mdates.DateFormatter('%B-%Y'))
   plt.xticks(fontsize=10,rotation=90)
   plt.yticks(fontsize=10)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.title("Daily Total Bike Sharing", loc="center", fontsize=15)
-   
+  plt.title("Daily Total Bike Sharing Usage", loc="center", fontsize=15)
+  ax.set_xlabel("Date", fontsize=13)
+  ax.set_ylabel("Total Bike Sharing", fontsize=13)
+  ax.grid(True, linestyle='--', alpha=0.4)
+  ax.legend()
+
   st.pyplot(fig)
 
   st.subheader('Weekly Bike Sharing')
@@ -166,53 +234,68 @@ if option == "All":
   col3, col4 = st.columns(2)
    
   with col3:
+      plt.style.use("seaborn-v0_8-whitegrid")
       fig, ax = plt.subplots(figsize=(20, 10))
       ax.plot(
         weekly_sharing_df["dteday"],
-        weekly_sharing_df["casual_sharing"],
-        marker='o', 
+        weekly_sharing_df["casual_sharing"], 
         linewidth=2,
-        color="#90CAF9"
+        color="#90CAF9",
+        label="Weekly Casual Sharing"
         )
       plt.xticks(fontsize=10,rotation=90)
       plt.yticks(fontsize=10)
       plt.tick_params(axis='y', labelsize=15)
       plt.tick_params(axis='x', labelsize=15)
-      plt.title("Weekly Casual Bike Sharing", loc="center", fontsize=15)
-      
+      plt.title("Weekly Casual Bike Sharing Usage", loc="center", fontsize=15)
+      ax.set_xlabel("Week", fontsize=13)
+      ax.set_ylabel("Casual Bike Sharing", fontsize=13)
+      ax.grid(True, linestyle='--', alpha=0.4)
+      ax.legend()
+
       st.pyplot(fig)
    
   with col4:
+      plt.style.use("seaborn-v0_8-whitegrid")
       fig, ax = plt.subplots(figsize=(20, 10))
       ax.plot(
         weekly_sharing_df["dteday"],
         weekly_sharing_df["registered_sharing"],
-        marker='o', 
         linewidth=2,
-        color="#90CAF9"
+        color="#90CAF9",
+        label="Weekly Registered Sharing"
         )
       plt.xticks(fontsize=10,rotation=90)
       plt.yticks(fontsize=10)
       plt.tick_params(axis='y', labelsize=15)
       plt.tick_params(axis='x', labelsize=15)
-      plt.title("Weekly Registered Bike Sharing", loc="center", fontsize=15)
-      
+      plt.title("Weekly Registered Bike Sharing Usage", loc="center", fontsize=15)
+      ax.set_xlabel("Week", fontsize=13)
+      ax.set_ylabel("Registered Bike Sharing", fontsize=13)
+      ax.grid(True, linestyle='--', alpha=0.4)
+      ax.legend()
+
       st.pyplot(fig)
   
+  plt.style.use("seaborn-v0_8-whitegrid")
   fig, ax = plt.subplots(figsize=(16, 8))
   ax.plot(
       weekly_sharing_df["dteday"],
       weekly_sharing_df["total_sharing"],
-      marker='o', 
       linewidth=2,
-      color="#90CAF9"
+      color="#90CAF9",
+      label="Weekly Total Sharing"
   )
   plt.xticks(fontsize=10,rotation=90)
   plt.yticks(fontsize=10)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.title("Weekly Total Bike Sharing", loc="center", fontsize=15)
-   
+  plt.title("Weekly Total Bike Sharing Usage", loc="center", fontsize=15)
+  ax.set_xlabel("Week", fontsize=13)
+  ax.set_ylabel("Total Bike Sharing", fontsize=13)
+  ax.grid(True, linestyle='--', alpha=0.4)
+  ax.legend()
+
   st.pyplot(fig)
   
   st.subheader('Monthly Bike Sharing')
@@ -232,53 +315,68 @@ if option == "All":
   col3, col4 = st.columns(2)
    
   with col3:
+      plt.style.use("seaborn-v0_8-whitegrid")
       fig, ax = plt.subplots(figsize=(20, 10))
       ax.plot(
         monthly_sharing_df["dteday"],
-        monthly_sharing_df["casual_sharing"],
-        marker='o', 
+        monthly_sharing_df["casual_sharing"], 
         linewidth=2,
-        color="#90CAF9"
+        color="#90CAF9",
+        label="Monthly Casual Sharing"
         )
       plt.xticks(fontsize=10,rotation=90)
       plt.yticks(fontsize=10)
       plt.tick_params(axis='y', labelsize=15)
       plt.tick_params(axis='x', labelsize=15)
-      plt.title("Monthly Casual Bike Sharing", loc="center", fontsize=15)
-      
+      plt.title("Monthly Casual Bike Sharing Usage", loc="center", fontsize=15)
+      ax.set_xlabel("Month", fontsize=13)
+      ax.set_ylabel("Casual Bike Sharing", fontsize=13)
+      ax.grid(True, linestyle='--', alpha=0.4)
+      ax.legend()
+
       st.pyplot(fig)
    
   with col4:
+      plt.style.use("seaborn-v0_8-whitegrid")
       fig, ax = plt.subplots(figsize=(20, 10))
       ax.plot(
         monthly_sharing_df["dteday"],
         monthly_sharing_df["registered_sharing"],
-        marker='o', 
         linewidth=2,
-        color="#90CAF9"
+        color="#90CAF9",
+        label="Monthly Registered Sharing"
         )
       plt.xticks(fontsize=10,rotation=90)
       plt.yticks(fontsize=10)
       plt.tick_params(axis='y', labelsize=15)
       plt.tick_params(axis='x', labelsize=15)
-      plt.title("Monthly Registered Bike Sharing", loc="center", fontsize=15)
-      
+      plt.title("Monthly Registered Bike Sharing Usage", loc="center", fontsize=15)
+      ax.set_xlabel("Month", fontsize=13)
+      ax.set_ylabel("Registered Bike Sharing", fontsize=13)
+      ax.grid(True, linestyle='--', alpha=0.4)
+      ax.legend()
+
       st.pyplot(fig)
 
+  plt.style.use("seaborn-v0_8-whitegrid")
   fig, ax = plt.subplots(figsize=(16, 8))
   ax.plot(
       monthly_sharing_df["dteday"],
       monthly_sharing_df["total_sharing"],
-      marker='o', 
       linewidth=2,
-      color="#90CAF9"
+      color="#90CAF9",
+      label="Monthly Total Sharing"
   )
   plt.xticks(fontsize=10,rotation=90)
   plt.yticks(fontsize=10)
   plt.tick_params(axis='y', labelsize=15)
   plt.tick_params(axis='x', labelsize=15)
-  plt.title("Monthly Total Bike Sharing", loc="center", fontsize=15)
-   
+  plt.title("Monthly Total Bike Sharing Usage", loc="center", fontsize=15)
+  ax.set_xlabel("Month", fontsize=13)
+  ax.set_ylabel("Total Bike Sharing", fontsize=13)
+  ax.grid(True, linestyle='--', alpha=0.4)
+  ax.legend()
+
   st.pyplot(fig)
   
   st.subheader('Comparison Casual and Registered Bike Sharing')
@@ -288,7 +386,7 @@ if option == "All":
   new_daily_sharing_df["total"] = new_daily_sharing_df.sum(axis=1)
   
   fig_1, ax_1 = plt.subplots(figsize=(16, 8))
-  ax_1.pie(new_daily_sharing_df["total"], labels=["casual", "registered"], autopct="%1.0f%%")
+  ax_1.pie(new_daily_sharing_df["total"], labels=["Casual", "Registered"], autopct="%1.0f%%")
   plt.title("Comparison Casual and Registered Bike Sharing", loc="center", fontsize=15)
   
   st.pyplot(fig_1)
